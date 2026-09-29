@@ -2,8 +2,8 @@
 name: github-update-skill
 description: "Draft GitHub READMEs and CC push prompts. Triggers: 'github update', 'repo readme', 'push to github'."
 metadata:
-  version: "1.2"
-  updated: "2026-06-12 "
+  version: "1.3"
+  updated: "2026-09-29"
 ---
 
 # GitHub Update Skill
@@ -18,10 +18,10 @@ Draft repo READMEs from portfolio deep dives and generate CC prompts for push.
 |---|---|
 | Edit content | Local file FIRST, always |
 | Push to GitHub | CC prompt → git push |
-| Local ≠ GitHub | Overwrite local with correct content, force push via CC |
+| Local ≠ GitHub | `git pull` first, reconcile in the local clone, then a normal push. Never force push |
 
 **Local file locations:**
-- Repo READMEs: `AGENCY\Site\GitHub-Repos\{repo-name}\README.md`
+- Repo clones (git, one per public repo): `Projects\github\{repo-name}\` (README at `Projects\github\{repo-name}\README.md`). Not on the shared drive.
 - Site repo (when exists): `AGENCY\Site\jordanwaxman-com\`
 
 **NEVER:** Edit via GitHub web editor, GitHub API, or any direct-to-remote method. If you catch yourself navigating to `github.com/.../edit` — stop, edit the local file instead.
@@ -65,12 +65,12 @@ Write README.md following the pattern from `ai-security-compliance-framework`:
 - **Architecture:** System diagram + component breakdown
 - **Key Insight:** The non-obvious lesson learned
 - **Results:** Hard numbers from ACCOMPLISHMENT-INVENTORY.md
-- **Built With:** Tech stack + session count
+- **Built With:** Tech stack (no session counts)
 - **License / Author:** Standard footer
 
 Save to Jordan's computer (local file = source of truth):
 ```
-Filesystem:write_file → AGENCY\Site\GitHub-Repos\{repo-name}\README.md
+Write → Projects\github\{repo-name}\README.md
 ```
 
 ### 4. GENERATE CC PROMPT
@@ -79,7 +79,7 @@ Output a clean prompt Jordan can paste into Claude Code:
 **For NEW repos:**
 ```
 Create a new GitHub repo called `{repo-name}` under mrminor-dev.
-Initialize with the README from PB\GitHub-Repos\{repo-name}\README.md
+Initialize with the README from Projects\github\{repo-name}\README.md
 Add description: "{one-line description}"
 Set topics: ai, {relevant-tags}
 ```
@@ -87,7 +87,7 @@ Set topics: ai, {relevant-tags}
 **For REFRESH repos:**
 ```
 Update the README for github.com/mrminor-dev/{repo-name}
-Replace with contents from AGENCY\Site\GitHub-Repos\{repo-name}\README.md
+Replace with contents from Projects\github\{repo-name}\README.md (commit and push from that clone; no force push)
 ```
 
 ### 5. UPDATE INVENTORY
@@ -96,7 +96,7 @@ Mark repo done in `references/REPO-INVENTORY.md`.
 ## Handoff Contract
 
 When complete, state:
-- README saved to: `AGENCY/Site/GitHub-Repos/{repo-name}/README.md`
+- README saved to: `Projects\github\{repo-name}\README.md`
 - CC prompt ready (new or refresh)
 
 ## Dependencies
@@ -104,7 +104,7 @@ When complete, state:
 - Required: Desktop Commander (read source, write README)
 - Required: Jordan executes CC prompt manually
 - Source: `PB/Career-Portfolio/Story-Mining/ACCOMPLISHMENT-INVENTORY.md` (numbers)
-- Source content: `AGENCY/Site/GitHub-Repos/{repo-name}/README.md` (current live README)
+- Source content: `Projects\github\{repo-name}\README.md` (current live README)
 
 ## Authority
 
@@ -115,3 +115,9 @@ Tier 2 — COO drafts autonomously, Jordan approves via CC execution
 - **Source section not found:** Ask Jordan which section maps to this repo
 - **Repo already exists on GitHub:** Use REFRESH prompt pattern, not NEW
 - **README too thin:** Pull additional evidence from ACCOMPLISHMENT-INVENTORY.md
+
+## Changelog
+
+| Version | Date | Change |
+|---|---|---|
+| 1.3 | 2026-09-29 | Repo clones moved off Drive to `Projects\github\`; no force push; inventory rewritten to the 11 live public repos. |

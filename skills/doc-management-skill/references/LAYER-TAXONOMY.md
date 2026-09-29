@@ -125,8 +125,9 @@ PB/
 ├── Job-Tracker/                        ← Active application tracking
 ├── Career-Portfolio/
 │   └── Story-Mining/                   ← D13-protected evidence, never edit
-└── GitHub-Repos/                       ← Public-repo working copies
 ```
+
+Public-repo working copies are NOT on the shared drive. They live in `Projects\github\` (one git clone per public repo). The old `PB/GitHub-Repos/` folder was removed 2026-09-29.
 
 ---
 
@@ -253,5 +254,6 @@ Per KNOWLEDGE-ORGANIZATION-BEST-PRACTICES.md, deeper nesting harms discoverabili
 
 | Version | Date | Session | Changes |
 |---|---|---|---|
+| 1.2 | 2026-09-29 | — | PB subfolder list: `GitHub-Repos/` removed; repo clones now live in `Projects\github\`. |
 | 1.1 | 2026-07-15 | (cascade) | L2 spine rewritten to Business Instances (AGENCY/PB/DENTAL). a former e-commerce project section deleted (decommissioned). PB section corrected (was falsely TBD; now reflects live subfolders). DENTAL section added. `Personal/` exclusion note added (Jordan ruling Q1). Common Mistakes + Skill Placement a former e-commerce project/PB refs updated. |
 | 1.0 | — | — | Prior baseline (untracked). |
